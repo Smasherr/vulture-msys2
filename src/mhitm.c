@@ -1192,7 +1192,7 @@ int amt, how;
 	    amt += (int) mon->mfrozen;
 	    if (amt > 0) {	/* sleep for N turns */
 		mon->mcanmove = 0;
-		mon->mfrozen = min(amt, 127);
+		mon->mfrozen = hack_min(amt, 127);
 	    } else {		/* sleep until awakened */
 		mon->msleeping = 1;
 	    }

@@ -229,7 +229,7 @@ boolean fleemsg;
 		fleetime += mtmp->mfleetim;
 		/* ensure monster flees long enough to visibly stop fighting */
 		if (fleetime == 1) fleetime++;
-		mtmp->mfleetim = min(fleetime, 127);
+		mtmp->mfleetim = hack_min(fleetime, 127);
 	    }
 	    if (!mtmp->mflee && fleemsg && canseemon(mtmp) && !mtmp->mfrozen)
 		pline("%s turns to flee!", (Monnam(mtmp)));
@@ -801,10 +801,10 @@ not_special:
 	if((likegold || likegems || likeobjs || likemagic || likerock || conceals)
 	      && (!*in_rooms(omx, omy, SHOPBASE) || (!rn2(25) && !mtmp->isshk))) {
 	look_for_obj:
-	    oomx = min(COLNO-1, omx+minr);
-	    oomy = min(ROWNO-1, omy+minr);
-	    lmx = max(1, omx-minr);
-	    lmy = max(0, omy-minr);
+	    oomx = hack_min(COLNO-1, omx+minr);
+	    oomy = hack_min(ROWNO-1, omy+minr);
+	    lmx = hack_max(1, omx-minr);
+	    lmy = hack_max(0, omy-minr);
 	    for(otmp = fobj; otmp; otmp = otmp->nobj) {
 		/* monsters may pick rocks up, but won't go out of their way
 		   to grab them; this might hamper sling wielders, but it cuts
@@ -848,10 +848,10 @@ not_special:
 			   /* Don't get stuck circling an Elbereth */
 			   !(onscary(xx, yy, mtmp))) {
 			    minr = distmin(omx,omy,xx,yy);
-			    oomx = min(COLNO-1, omx+minr);
-			    oomy = min(ROWNO-1, omy+minr);
-			    lmx = max(1, omx-minr);
-			    lmy = max(0, omy-minr);
+			    oomx = hack_min(COLNO-1, omx+minr);
+			    oomy = hack_min(ROWNO-1, omy+minr);
+			    lmx = hack_max(1, omx-minr);
+			    lmy = hack_max(0, omy-minr);
 			    gx = otmp->ox;
 			    gy = otmp->oy;
 			    if (gx == omx && gy == omy) {
@@ -911,7 +911,7 @@ not_special:
 
 	    cnt = mfndpos(mtmp, poss, info, flag);
 	    chcnt = 0;
-	    jcnt = min(MTSZ, cnt-1);
+	    jcnt = hack_min(MTSZ, cnt-1);
 	    chi = -1;
 	    nidist = dist2(nix,niy,gx,gy);
 	    /* allow monsters be shortsighted on some levels for balance */

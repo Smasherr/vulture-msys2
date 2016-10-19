@@ -823,11 +823,11 @@ pleased(g_align)
 	} else {
 	    int action = rn1(Luck + (on_altar() ? 3 + on_shrine() : 2), 1);
 
-	    if (!on_altar()) action = min(action, 3);
+	    if (!on_altar()) action = hack_min(action, 3);
 	    if (u.ualign.record < STRIDENT)
 		action = (u.ualign.record > 0 || !rnl(2)) ? 1 : 0;
 
-	    switch(min(action,5)) {
+	    switch(hack_min(action,5)) {
 	    case 5: pat_on_head = 1;
 	    case 4: do fix_worst_trouble(trouble);
 		    while ((trouble = in_trouble()) != 0);

@@ -1667,7 +1667,7 @@ register struct attack *mattk;
 	    case AD_BLND:
 		if (!resists_blnd(mdef)) {
 		    pline("%s is blinded by your flash of light!", Monnam(mdef));
-		    mdef->mblinded = min((int)mdef->mblinded + tmp, 127);
+		    mdef->mblinded = hack_min((int)mdef->mblinded + tmp, 127);
 		    mdef->mcansee = 0;
 		}
 		break;
@@ -2481,7 +2481,7 @@ struct obj *otmp;	/* source of flash */
 		if (mtmp->data == &mons[PM_GREMLIN]) {
 		    /* Rule #1: Keep them out of the light. */
 		    amt = otmp->otyp == WAN_LIGHT ? d(1 + otmp->spe, 4) :
-		          rn2(min(mtmp->mhp,4));
+		          rn2(hack_min(mtmp->mhp,4));
 		    pline("%s %s!", Monnam(mtmp), amt > mtmp->mhp / 2 ?
 			  "wails in agony" : "cries out in pain");
 		    if ((mtmp->mhp -= amt) <= 0) {

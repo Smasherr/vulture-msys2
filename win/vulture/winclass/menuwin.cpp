@@ -18,8 +18,8 @@ extern "C" {
 #include "textwin.h"
 #include "optionwin.h"
 
-#define min(a, b) (((a) < (b)) ? (a) : (b))
-#define max(a, b) (((a) > (b)) ? (a) : (b))
+#define hack_min(a, b) (((a) < (b)) ? (a) : (b))
+#define hack_max(a, b) (((a) > (b)) ? (a) : (b))
 
 
 menuwin::menuwin(window *p, std::list<menuitem> &menuitems, int how) : 
@@ -351,7 +351,7 @@ void menuwin::layout()
 	h = scrollheight + buttonheight;
 	menu_height_limit = parent->get_h() - get_frameheight() - buttonheight - 30;
 	if (h > menu_height_limit) {
-		h = min(menu_height_limit, MAX_MENU_HEIGHT);
+		h = hack_min(menu_height_limit, MAX_MENU_HEIGHT);
 		scrollheight = h - buttonheight;
 		scrollarea->set_height(scrollheight);
 	}

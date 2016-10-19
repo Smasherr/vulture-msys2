@@ -1084,7 +1084,7 @@ boolean your_fault;
 		    register int btmp = 64 + rn2(32) +
 			rn2(32) * !resist(mon, POTION_CLASS, 0, NOTELL);
 		    btmp += mon->mblinded;
-		    mon->mblinded = min(btmp,127);
+		    mon->mblinded = hack_min(btmp,127);
 		    mon->mcansee = 0;
 		}
 		break;

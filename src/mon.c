@@ -1051,10 +1051,10 @@ nexttry:	/* eels prefer the water, but if there is no water nearby,
 	}
 	if(!mon->mcansee)
 		flag |= ALLOW_SSM;
-	maxx = min(x+1,COLNO-1);
-	maxy = min(y+1,ROWNO-1);
-	for(nx = max(1,x-1); nx <= maxx; nx++)
-	  for(ny = max(0,y-1); ny <= maxy; ny++) {
+	maxx = hack_min(x+1,COLNO-1);
+	maxy = hack_min(y+1,ROWNO-1);
+	for(nx = hack_max(1,x-1); nx <= maxx; nx++)
+	  for(ny = hack_max(0,y-1); ny <= maxy; ny++) {
 	    if(nx == x && ny == y) continue;
 	    if(IS_ROCK(ntyp = levl[nx][ny].typ) &&
 	       !((flag & ALLOW_WALL) && may_passwall(nx,ny)) &&

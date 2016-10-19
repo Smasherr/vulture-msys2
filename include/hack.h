@@ -273,16 +273,18 @@ NEARDATA extern coord bhitpos;	/* place where throw or zap hits or stops */
 #define FEATURE_NOTICE_VER_MIN	  (((unsigned long)(0x0000000000FF0000L & flags.suppress_alert)) >> 16)
 #define FEATURE_NOTICE_VER_PATCH  (((unsigned long)(0x000000000000FF00L & flags.suppress_alert)) >>  8)
 
-#ifndef max
-#define max(a,b) ((a) > (b) ? (a) : (b))
+#ifndef hack_max
+//#undef max
+#define hack_max(a,b) ((a) > (b) ? (a) : (b))
 #endif
-#ifndef min
-#define min(x,y) ((x) < (y) ? (x) : (y))
+#ifndef hack_min
+//#undef min
+#define hack_min(x,y) ((x) < (y) ? (x) : (y))
 #endif
 #define plur(x) (((x) == 1) ? "" : "s")
 
 #define ARM_BONUS(obj)	(objects[(obj)->otyp].a_ac + (obj)->spe \
-			 - min((int)greatest_erosion(obj),objects[(obj)->otyp].a_ac))
+			 - hack_min((int)greatest_erosion(obj),objects[(obj)->otyp].a_ac))
 
 #define makeknown(x)	discover_object((x),TRUE,TRUE)
 #define distu(xx,yy)	dist2((int)(xx),(int)(yy),(int)u.ux,(int)u.uy)

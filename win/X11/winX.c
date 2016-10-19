@@ -1869,8 +1869,8 @@ init_standard_windows()
 	XtGetValues(toplevel, args, TWO);
 	
 	if (form_width > screen_width || form_height > screen_height) {
-	    XtSetArg(args[0], XtNwidth, min(form_width,screen_width));
-	    XtSetArg(args[1], XtNheight, min(form_height,screen_height));
+	    XtSetArg(args[0], XtNwidth, hack_min(form_width,screen_width));
+	    XtSetArg(args[1], XtNheight, hack_min(form_height,screen_height));
 	    XtSetValues(toplevel, args, TWO);
 	    XMoveWindow(XtDisplay(toplevel),XtWindow(toplevel),
 		0, TITLEBAR_SPACE);

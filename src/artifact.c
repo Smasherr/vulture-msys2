@@ -657,7 +657,7 @@ int tmp;
 	    spec_dbon_applies = spec_applies(weap, mon);
 
 	if (spec_dbon_applies)
-	    return weap->attk.damd ? rnd((int)weap->attk.damd) : max(tmp,1);
+	    return weap->attk.damd ? rnd((int)weap->attk.damd) : hack_max(tmp,1);
 	return 0;
 }
 
@@ -781,7 +781,7 @@ char *hittee;			/* target's name: "you" or mon_nam(mdef) */
        in that case it will only happen if the other effect fails;
        extra damage will apply regardless; 3.4.1: sometimes might
        just probe even when it hasn't been enchanted */
-    do_stun = (max(mb->spe,0) < rn2(spec_dbon_applies ? 11 : 7));
+    do_stun = (hack_max(mb->spe,0) < rn2(spec_dbon_applies ? 11 : 7));
 
     /* the special effects also boost physical damage; increments are
        generally cumulative, but since the stun effect is based on a

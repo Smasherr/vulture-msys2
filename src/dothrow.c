@@ -1587,7 +1587,7 @@ boolean from_invent;
 		case EGG:
 			/* breaking your own eggs is bad luck */
 			if (hero_caused && obj->spe && obj->corpsenm >= LOW_PM)
-			    change_luck((schar) -min(obj->quan, 5L));
+			    change_luck((schar) -hack_min(obj->quan, 5L));
 			break;
 	}
 	if (hero_caused) {

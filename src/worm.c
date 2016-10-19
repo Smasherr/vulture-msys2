@@ -383,7 +383,7 @@ cutworm(worm, x, y, weap)
 
     /* Devalue the monster level of both halves of the worm. */
     worm->m_lev = ((unsigned)worm->m_lev <= 3) ?
-		   (unsigned)worm->m_lev : max((unsigned)worm->m_lev - 2, 3);
+		   (unsigned)worm->m_lev : hack_max((unsigned)worm->m_lev - 2, 3);
     new_worm->m_lev = worm->m_lev;
 
     /* Calculate the mhp on the new_worm for the (lower) monster level. */

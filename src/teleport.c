@@ -130,10 +130,10 @@ unsigned entflags;
      * radius range.  Stop when we find at least one valid position.
      */
     do {
-	xmin = max(1, xx-range);
-	xmax = min(COLNO-1, xx+range);
-	ymin = max(0, yy-range);
-	ymax = min(ROWNO-1, yy+range);
+	xmin = hack_max(1, xx-range);
+	xmax = hack_min(COLNO-1, xx+range);
+	ymin = hack_max(0, yy-range);
+	ymax = hack_min(ROWNO-1, yy+range);
 
 	for (x = xmin; x <= xmax; x++)
 	    if (goodpos(x, ymin, &fakemon, entflags)) {

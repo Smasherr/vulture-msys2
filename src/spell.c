@@ -654,7 +654,7 @@ cast_protection()
 	 *     16-30   0    0,  5,  9, 11, 13, 14, 15
 	 *     16-30 -10    0,  5,  8,  9, 10
 	 */
-	gain = loglev - (int)u.uspellprot / (4 - min(3,(10 - natac)/10));
+	gain = loglev - (int)u.uspellprot / (4 - hack_min(3,(10 - natac)/10));
 
 	if (gain > 0) {
 	    if (!Blind) {
@@ -947,7 +947,7 @@ boolean atme;
 		cast_protection();
 		break;
 	case SPE_JUMPING:
-		if (!jump(max(role_skill,1)))
+		if (!jump(hack_max(role_skill,1)))
 			pline(nothing_happens);
 		break;
 	default:
@@ -1214,7 +1214,7 @@ int spell;
 	 * in that spell type.
 	 */
 	skill = P_SKILL(spell_skilltype(spellid(spell)));
-	skill = max(skill,P_UNSKILLED) - 1;	/* unskilled => 0 */
+	skill = hack_max(skill,P_UNSKILLED) - 1;	/* unskilled => 0 */
 	difficulty= (spellev(spell)-1) * 4 - ((skill * 6) + (u.ulevel/3) + 1);
 
 	if (difficulty > 0) {

@@ -29,8 +29,8 @@ extern "C" {
  */
 #undef min
 #undef max
-#define min(a, b) (((a) < (b)) ? (a) : (b))
-#define max(a, b) (((a) > (b)) ? (a) : (b))
+#define hack_min(a, b) (((a) < (b)) ? (a) : (b))
+#define hack_max(a, b) (((a) > (b)) ? (a) : (b))
 
 #define VULTURE_CLIPMARGIN 200
 
@@ -228,10 +228,10 @@ bool levelwin::draw()
 	}
 	else
 	{
-		clip_tl_x = min(clip_tl_x, 0);
-		clip_tl_y = min(clip_tl_y, 0);
-		clip_br_x = max(clip_br_x, this->abs_x + this->w - 1);
-		clip_br_y = max(clip_br_y, this->abs_y + this->h - 1);
+		clip_tl_x = hack_min(clip_tl_x, 0);
+		clip_tl_y = hack_min(clip_tl_y, 0);
+		clip_br_x = hack_max(clip_br_x, this->abs_x + this->w - 1);
+		clip_br_y = hack_max(clip_br_y, this->abs_y + this->h - 1);
 	}
 
 	if (clip_tl_x >= this->w + this->abs_x ||
@@ -743,11 +743,11 @@ void levelwin::map_update(glyph_type type, int prev_glyph, int new_glyph, int x,
 		}
 
 		if (newtile) {
-			tl_x = min(newtile->xmod, tl_x);
-			tl_y = min(newtile->ymod, tl_y);
+			tl_x = hack_min(newtile->xmod, tl_x);
+			tl_y = hack_min(newtile->ymod, tl_y);
 
-			br_x = max(br_x, newtile->xmod + newtile->graphic->w);
-			br_y = max(br_y, newtile->ymod + newtile->graphic->h);
+			br_x = hack_max(br_x, newtile->xmod + newtile->graphic->w);
+			br_y = hack_max(br_y, newtile->ymod + newtile->graphic->h);
 		}
 
 		tl_x += pixel_x;
@@ -832,10 +832,10 @@ void levelwin::toggle_uiwin(int menuid, bool enabled)
 
 void levelwin::add_to_clipregion(int tl_x, int tl_y, int br_x, int br_y)
 {
-	clip_tl_x = min(clip_tl_x, tl_x);
-	clip_tl_y = min(clip_tl_y, tl_y);
-	clip_br_x = max(clip_br_x, br_x);
-	clip_br_y = max(clip_br_y, br_y);
+	clip_tl_x = hack_min(clip_tl_x, tl_x);
+	clip_tl_y = hack_min(clip_tl_y, tl_y);
+	clip_br_x = hack_max(clip_br_x, br_x);
+	clip_br_y = hack_max(clip_br_y, br_y);
 }
 
 

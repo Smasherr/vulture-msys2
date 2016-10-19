@@ -1842,7 +1842,7 @@ char		*tmp_levels;
 	} else if (match_varname(buf, "DEPTH", 5)) {
 		extern int amii_numcolors;
 		int val = atoi( bufp );
-		amii_numcolors = 1L << min( DEPTH, val );
+		amii_numcolors = 1L << hack_min( DEPTH, val );
 	} else if (match_varname(buf, "DRIPENS", 7)) {
 		int i, val;
 		char *t;

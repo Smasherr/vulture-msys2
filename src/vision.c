@@ -325,10 +325,10 @@ rogue_vision(next, rmin, rmax)
     in_door = levl[u.ux][u.uy].typ == DOOR;
 
     /* Can always see adjacent. */
-    ylo = max(u.uy - 1, 0);
-    yhi = min(u.uy + 1, ROWNO - 1);
-    xlo = max(u.ux - 1, 1);
-    xhi = min(u.ux + 1, COLNO - 1);
+    ylo = hack_max(u.uy - 1, 0);
+    yhi = hack_min(u.uy + 1, ROWNO - 1);
+    xlo = hack_max(u.ux - 1, 1);
+    xhi = hack_min(u.ux + 1, COLNO - 1);
     for (zy = ylo; zy <= yhi; zy++) {
 	if (xlo < rmin[zy]) rmin[zy] = xlo;
 	if (xhi > rmax[zy]) rmax[zy] = xhi;
@@ -555,8 +555,8 @@ vision_recalc(control)
 	    old_row = temp_array[row];
 
 	    /* Find the min and max positions on the row. */
-	    start = min(viz_rmin[row], next_rmin[row]);
-	    stop  = max(viz_rmax[row], next_rmax[row]);
+	    start = hack_min(viz_rmin[row], next_rmin[row]);
+	    stop  = hack_max(viz_rmax[row], next_rmax[row]);
 
 	    for (col = start; col <= stop; col++)
 		if (old_row[col] & IN_SIGHT) newsym(col,row);
@@ -585,8 +585,8 @@ vision_recalc(control)
 		for (col = u.ux-1; col <= u.ux+1; col++) {
 		    if (!isok(col,row) || !is_pool(col,row)) continue;
 
-		    next_rmin[row] = min(next_rmin[row], col);
-		    next_rmax[row] = max(next_rmax[row], col);
+		    next_rmin[row] = hack_min(next_rmin[row], col);
+		    next_rmax[row] = hack_max(next_rmax[row], col);
 		    next_array[row][col] = IN_SIGHT | COULD_SEE;
 		}
 	}
@@ -596,8 +596,8 @@ vision_recalc(control)
 	    for (row = u.uy-1; row <= u.uy+1; row++) {
 		if (row < 0) continue;	if (row >= ROWNO) break;
 
-		next_rmin[row] = max(      0, u.ux - 1);
-		next_rmax[row] = min(COLNO-1, u.ux + 1);
+		next_rmin[row] = hack_max(      0, u.ux - 1);
+		next_rmax[row] = hack_min(COLNO-1, u.ux + 1);
 		next_row = next_array[row];
 
 		for(col=next_rmin[row]; col <= next_rmax[row]; col++)
@@ -618,8 +618,8 @@ vision_recalc(control)
 		    if (row < 0) continue;	if (row >= ROWNO) break;
 		    dy = v_abs(u.uy-row);	next_row = next_array[row];
 
-		    start = max(      0, u.ux - ranges[dy]);
-		    stop  = min(COLNO-1, u.ux + ranges[dy]);
+		    start = hack_max(      0, u.ux - ranges[dy]);
+		    stop  = hack_min(COLNO-1, u.ux + ranges[dy]);
 
 		    for (col = start; col <= stop; col++) {
 			char old_row_val = next_row[col];
@@ -631,15 +631,15 @@ vision_recalc(control)
 			    newsym(col,row);
 		    }
 
-		    next_rmin[row] = min(start, next_rmin[row]);
-		    next_rmax[row] = max(stop, next_rmax[row]);
+		    next_rmin[row] = hack_min(start, next_rmin[row]);
+		    next_rmax[row] = hack_max(stop, next_rmax[row]);
 		}
 
 	    } else {	/* range is 0 */
 		next_array[u.uy][u.ux] |= IN_SIGHT;
 		levl[u.ux][u.uy].seenv = SVALL;
-		next_rmin[u.uy] = min(u.ux, next_rmin[u.uy]);
-		next_rmax[u.uy] = max(u.ux, next_rmax[u.uy]);
+		next_rmin[u.uy] = hack_min(u.ux, next_rmin[u.uy]);
+		next_rmax[u.uy] = hack_max(u.ux, next_rmax[u.uy]);
 	    }
 	}
 
@@ -647,8 +647,8 @@ vision_recalc(control)
 	    if (!u.nv_range) {	/* range is 0 */
 		next_array[u.uy][u.ux] |= IN_SIGHT;
 		levl[u.ux][u.uy].seenv = SVALL;
-		next_rmin[u.uy] = min(u.ux, next_rmin[u.uy]);
-		next_rmax[u.uy] = max(u.ux, next_rmax[u.uy]);
+		next_rmin[u.uy] = hack_min(u.ux, next_rmin[u.uy]);
+		next_rmax[u.uy] = hack_max(u.ux, next_rmax[u.uy]);
 	    } else if (u.nv_range > 0) {
 		ranges = circle_ptr(u.nv_range);
 
@@ -656,14 +656,14 @@ vision_recalc(control)
 		    if (row < 0) continue;	if (row >= ROWNO) break;
 		    dy = v_abs(u.uy-row);	next_row = next_array[row];
 
-		    start = max(      0, u.ux - ranges[dy]);
-		    stop  = min(COLNO-1, u.ux + ranges[dy]);
+		    start = hack_max(      0, u.ux - ranges[dy]);
+		    stop  = hack_min(COLNO-1, u.ux + ranges[dy]);
 
 		    for (col = start; col <= stop; col++)
 			if (next_row[col]) next_row[col] |= IN_SIGHT;
 
-		    next_rmin[row] = min(start, next_rmin[row]);
-		    next_rmax[row] = max(stop, next_rmax[row]);
+		    next_rmin[row] = hack_min(start, next_rmin[row]);
+		    next_rmax[row] = hack_max(stop, next_rmax[row]);
 		}
 	    }
 	}
@@ -701,8 +701,8 @@ vision_recalc(control)
 	next_row = next_array[row];     old_row = temp_array[row];
 
 	/* Find the min and max positions on the row. */
-	start = min(viz_rmin[row], next_rmin[row]);
-	stop  = max(viz_rmax[row], next_rmax[row]);
+	start = hack_min(viz_rmin[row], next_rmin[row]);
+	stop  = hack_max(viz_rmax[row], next_rmax[row]);
 	lev = &levl[start][row];
 
 	sv = &seenv_matrix[dy+1][start < u.ux ? 0 : (start > u.ux ? 2:1)];

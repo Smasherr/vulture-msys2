@@ -271,7 +271,7 @@ register struct monst *mtmp;
 		    bless(otmp);
 		    otmp->oerodeproof = TRUE;
 		    spe2 = rn2(4);
-		    otmp->spe = max(otmp->spe, spe2);
+		    otmp->spe = hack_max(otmp->spe, spe2);
 		    (void) mpickobj(mtmp, otmp);
 
 		    otmp = mksobj(!rn2(4) || is_lord(ptr) ?
@@ -739,9 +739,9 @@ xchar x, y;	/* clone's preferred location or 0 (near mon) */
 	/* not all clones caused by player are tame or peaceful */
 	if (!flags.mon_moving) {
 	    if (mon->mtame)
-		m2->mtame = rn2(max(2 + u.uluck, 2)) ? mon->mtame : 0;
+		m2->mtame = rn2(hack_max(2 + u.uluck, 2)) ? mon->mtame : 0;
 	    else if (mon->mpeaceful)
-		m2->mpeaceful = rn2(max(2 + u.uluck, 2)) ? 1 : 0;
+		m2->mpeaceful = rn2(hack_max(2 + u.uluck, 2)) ? 1 : 0;
 	}
 
 	newsym(m2->mx,m2->my);	/* display the new monster */
@@ -1431,7 +1431,7 @@ struct monst *mtmp, *victim;
 	       the limit at the bottom of the next level rather than the top */
 	    max_increase = rnd((int)victim->m_lev + 1);
 	    if (mtmp->mhpmax + max_increase > hp_threshold + 1)
-		max_increase = max((hp_threshold + 1) - mtmp->mhpmax, 0);
+		max_increase = hack_max((hp_threshold + 1) - mtmp->mhpmax, 0);
 	    cur_increase = (max_increase > 1) ? rn2(max_increase) : 0;
 	} else {
 	    /* a gain level potion or wraith corpse; always go up a level
@@ -1633,21 +1633,21 @@ struct monst *mtmp;
 	} else if (always_peaceful(mtmp->data)) {
 		int absmal = abs(mal);
 		if (mtmp->mpeaceful)
-			mtmp->malign = -3*max(5,absmal);
+			mtmp->malign = -3*hack_max(5,absmal);
 		else
-			mtmp->malign = 3*max(5,absmal); /* renegade */
+			mtmp->malign = 3*hack_max(5,absmal); /* renegade */
 	} else if (always_hostile(mtmp->data)) {
 		int absmal = abs(mal);
 		if (coaligned)
 			mtmp->malign = 0;
 		else
-			mtmp->malign = max(5,absmal);
+			mtmp->malign = hack_max(5,absmal);
 	} else if (coaligned) {
 		int absmal = abs(mal);
 		if (mtmp->mpeaceful)
-			mtmp->malign = -3*max(3,absmal);
+			mtmp->malign = -3*hack_max(3,absmal);
 		else	/* renegade */
-			mtmp->malign = max(3,absmal);
+			mtmp->malign = hack_max(3,absmal);
 	} else	/* not coaligned and therefore hostile */
 		mtmp->malign = abs(mal);
 }

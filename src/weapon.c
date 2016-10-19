@@ -1211,7 +1211,7 @@ struct obj *weapon;
 	 *	grand:	+3    +7
 	 */
 	bonus = P_SKILL(type);
-	bonus = max(bonus,P_UNSKILLED) - 1;	/* unskilled => 0 */
+	bonus = hack_max(bonus,P_UNSKILLED) - 1;	/* unskilled => 0 */
 	bonus = ((bonus + 2) * (martial_bonus() ? 2 : 1)) / 2;
     }
 
@@ -1280,7 +1280,7 @@ struct obj *weapon;
 	 *	grand:	+3    +9
 	 */
 	bonus = P_SKILL(type);
-	bonus = max(bonus,P_UNSKILLED) - 1;	/* unskilled => 0 */
+	bonus = hack_max(bonus,P_UNSKILLED) - 1;	/* unskilled => 0 */
 	bonus = ((bonus + 1) * (martial_bonus() ? 3 : 1)) / 2;
     }
 

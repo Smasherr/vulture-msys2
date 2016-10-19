@@ -1591,7 +1591,7 @@ dopois:
 		if (Upolyd) {
 		    hpmax_p = &u.mhmax;
 		    /* [can't use youmonst.m_lev] */
-		    lowerlimit = min((int)youmonst.data->mlevel, u.ulevel);
+		    lowerlimit = hack_min((int)youmonst.data->mlevel, u.ulevel);
 		} else {
 		    hpmax_p = &u.uhpmax;
 		    lowerlimit = u.ulevel;

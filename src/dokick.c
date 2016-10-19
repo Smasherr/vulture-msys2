@@ -1355,7 +1355,7 @@ boolean shop_floor_obj;
 	    } else {
 		/* penalty for breaking eggs laid by you */
 		if (otmp->otyp == EGG && otmp->spe && otmp->corpsenm >= LOW_PM)
-		    change_luck((schar) -min(otmp->quan, 5L));
+		    change_luck((schar) -hack_min(otmp->quan, 5L));
 		result = "splat";
 	    }
 	    You_hear("a muffled %s.",result);

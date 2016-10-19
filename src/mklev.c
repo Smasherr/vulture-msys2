@@ -136,7 +136,7 @@ do_room_or_subroom(croom, lowx, lowy, hix, hiy, lit, rtype, special, is_room)
 
 	if(lit) {
 		for(x = lowx-1; x <= hix+1; x++) {
-			lev = &levl[x][max(lowy-1,0)];
+			lev = &levl[x][hack_max(lowy-1,0)];
 			for(y = lowy-1; y <= hiy+1; y++)
 				lev++->lit = 1;
 		}

@@ -840,9 +840,9 @@ tty_create_nhwindow(type)
 		newwin->offy = ttyDisplay->rows-2;
 	} else
 #endif
-	newwin->offy = min((int)ttyDisplay->rows-2, ROWNO+1);
+	newwin->offy = hack_min((int)ttyDisplay->rows-2, ROWNO+1);
 	newwin->rows = newwin->maxrow = 2;
-	newwin->cols = newwin->maxcol = min(ttyDisplay->cols, COLNO);
+	newwin->cols = newwin->maxcol = hack_min(ttyDisplay->cols, COLNO);
 	break;
     case NHW_MAP:
 	/* map window, ROWNO lines long, full width, below message window */
@@ -1528,7 +1528,7 @@ tty_display_nhwindow(window, blocking)
 	cw->active = 1;
 	/* avoid converting to uchar before calculations are finished */
 	cw->offx = (uchar) (int)
-	    max((int) 10, (int) (ttyDisplay->cols - cw->maxcol - 1));
+	    hack_max((int) 10, (int) (ttyDisplay->cols - cw->maxcol - 1));
 	if(cw->type == NHW_MENU)
 	    cw->offy = 0;
 	if(ttyDisplay->toplin == 1)
@@ -2083,7 +2083,7 @@ tty_end_menu(window, prompt)
 	tty_add_menu(window, NO_GLYPH, &any, 0, 0, ATR_NONE, prompt, MENU_UNSELECTED);
     }
 
-    lmax = min(52, (int)ttyDisplay->rows - 1);		/* # lines per page */
+    lmax = hack_min(52, (int)ttyDisplay->rows - 1);		/* # lines per page */
     cw->npages = (cw->nitems + (lmax - 1)) / lmax;	/* # of pages */
 
     /* make sure page list is large enough */
@@ -2373,19 +2373,19 @@ int x, y;
 
 	if (!clipping) return;
 	if (x < clipx + 5) {
-		clipx = max(0, x - 20);
+		clipx = hack_max(0, x - 20);
 		clipxmax = clipx + CO;
 	}
 	else if (x > clipxmax - 5) {
-		clipxmax = min(COLNO, clipxmax + 20);
+		clipxmax = hack_min(COLNO, clipxmax + 20);
 		clipx = clipxmax - CO;
 	}
 	if (y < clipy + 2) {
-		clipy = max(0, y - (clipymax - clipy) / 2);
+		clipy = hack_max(0, y - (clipymax - clipy) / 2);
 		clipymax = clipy + (LI - 3);
 	}
 	else if (y > clipymax - 2) {
-		clipymax = min(ROWNO, clipymax + (clipymax - clipy) / 2);
+		clipymax = hack_min(ROWNO, clipymax + (clipymax - clipy) / 2);
 		clipy = clipymax - (LI - 3);
 	}
 	if (clipx != oldx || clipy != oldy) {

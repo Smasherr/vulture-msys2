@@ -510,7 +510,7 @@ menu_pickup:
 	    if (ct == 1 && count) {
 		/* if only one thing, then pick it */
 		obj = objchain;
-		lcount = min(obj->quan, (long)count);
+		lcount = hack_min(obj->quan, (long)count);
 		n_tried++;
 		if (pickup_object(obj, lcount, FALSE) > 0)
 		    n_picked++;	/* picked something */
@@ -1570,7 +1570,7 @@ lootcont:
     } else if (Confusion) {
 #ifndef GOLDOBJ
 	if (u.ugold){
-	    long contribution = rnd((int)min(LARGEST_INT,u.ugold));
+	    long contribution = rnd((int)hack_min(LARGEST_INT,u.ugold));
 	    struct obj *goldob = mkgoldobj(contribution);
 #else
 	struct obj *goldob;
@@ -1579,7 +1579,7 @@ lootcont:
 	    if (goldob->oclass == COIN_CLASS) break;
 	}
 	if (goldob){
-	    long contribution = rnd((int)min(LARGEST_INT, goldob->quan));
+	    long contribution = rnd((int)hack_min(LARGEST_INT, goldob->quan));
 	    if (contribution < goldob->quan)
 		goldob = splitobj(goldob, contribution);
 	    freeinv(goldob);

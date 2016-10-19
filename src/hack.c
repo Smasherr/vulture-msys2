@@ -2234,7 +2234,7 @@ int xtra_wt;
     if (wt <= 0) return UNENCUMBERED;
     if (wc <= 1) return OVERLOADED;
     cap = (wt*2 / wc) + 1;
-    return min(cap, OVERLOADED);
+    return hack_min(cap, OVERLOADED);
 }
 
 int

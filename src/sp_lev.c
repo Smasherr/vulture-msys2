@@ -1685,10 +1685,10 @@ light_region(tmpregion)
 
     if(litstate) {
 	/* adjust region size for walls, but only if lighted */
-	lowx = max(lowx-1,1);
-	hix = min(hix+1,COLNO-1);
-	lowy = max(lowy-1,0);
-	hiy = min(hiy+1, ROWNO-1);
+	lowx = hack_max(lowx-1,1);
+	hix = hack_min(hix+1,COLNO-1);
+	lowy = hack_max(lowy-1,0);
+	hiy = hack_min(hiy+1, ROWNO-1);
     }
     for(x = lowx; x <= hix; x++) {
 	lev = &levl[x][lowy];

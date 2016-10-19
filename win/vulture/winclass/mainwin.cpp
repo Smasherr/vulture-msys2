@@ -7,8 +7,8 @@
 #include "vulture_sdl.h"
 #include "vulture_txt.h"
 
-#define min(a, b) (((a) < (b)) ? (a) : (b))
-#define max(a, b) (((a) > (b)) ? (a) : (b))
+#define hack_min(a, b) (((a) < (b)) ? (a) : (b))
+#define hack_max(a, b) (((a) > (b)) ? (a) : (b))
 
 
 mainwin::mainwin(window *p) : window(p)
@@ -130,11 +130,11 @@ void mainwin::layout()
 	for (winelem = first_child; winelem != NULL; winelem = winelem->sib_next) {
 		if (winelem->get_wintype() == V_WINTYPE_BUTTON) {
 			btncount++;
-			btn_maxwidth = max(btn_maxwidth, winelem->w);
+			btn_maxwidth = hack_max(btn_maxwidth, winelem->w);
 		} else {
-			max_x = max(winelem->x + winelem->w, max_x);
-			max_y = max(winelem->y + winelem->h, max_y);
-			min_y = min(winelem->y, min_y);
+			max_x = hack_max(winelem->x + winelem->w, max_x);
+			max_y = hack_max(winelem->y + winelem->h, max_y);
+			min_y = hack_min(winelem->y, min_y);
 		}
 	}
 
@@ -146,11 +146,11 @@ void mainwin::layout()
 
 	/* make the window wide enough to fit all the buttons in */
 	btn_totalwidth = (btn_maxwidth + 10) * btncount - 10;
-	max_x = max(max_x, btn_totalwidth);
+	max_x = hack_max(max_x, btn_totalwidth);
 	max_y += offset_top;
 	
 	/* assign positions */
-	pos_x = max((max_x - btn_totalwidth) / 2, 0);
+	pos_x = hack_max((max_x - btn_totalwidth) / 2, 0);
 	for (winelem = first_child; winelem != NULL; winelem = winelem->sib_next) {
 		if (winelem->get_wintype() == V_WINTYPE_BUTTON) {
 			winelem->w = btn_maxwidth;

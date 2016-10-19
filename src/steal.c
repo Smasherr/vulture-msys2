@@ -126,7 +126,7 @@ register struct monst *mtmp;
 	} else if(ygold) {
             const int gold_price = objects[GOLD_PIECE].oc_cost;
 	    tmp = (somegold(money_cnt(invent)) + gold_price - 1) / gold_price;
-	    tmp = min(tmp, ygold->quan);
+	    tmp = hack_min(tmp, ygold->quan);
             if (tmp < ygold->quan) ygold = splitobj(ygold, tmp);
             freeinv(ygold);
             add_to_minv(mtmp, ygold);

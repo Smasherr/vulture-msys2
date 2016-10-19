@@ -286,7 +286,7 @@ boolean with_you;
 	    mtmp->mlstmv = monstermoves - 1L;
 
 	    /* let monster move a bit on new level (see placement code below) */
-	    wander = (xchar) min(nmv, 8);
+	    wander = (xchar) hack_min(nmv, 8);
 	} else
 	    wander = 0;
 
@@ -345,11 +345,11 @@ boolean with_you;
 		    xlocale = ylocale = 0;
 	    } else {		/* not in a room */
 		int i, j;
-		i = max(1, xlocale - wander);
-		j = min(COLNO-1, xlocale + wander);
+		i = hack_max(1, xlocale - wander);
+		j = hack_min(COLNO-1, xlocale + wander);
 		xlocale = rn1(j - i, i);
-		i = max(0, ylocale - wander);
-		j = min(ROWNO-1, ylocale + wander);
+		i = hack_max(0, ylocale - wander);
+		j = hack_min(ROWNO-1, ylocale + wander);
 		ylocale = rn1(j - i, i);
 	    }
 	}	/* moved a bit */
@@ -545,7 +545,7 @@ boolean pets_only;	/* true for ascension or final escape */
 		    register int cnt;
 		    /* NOTE: worm is truncated to # segs = max wormno size */
 		    cnt = count_wsegs(mtmp);
-		    num_segs = min(cnt, MAX_NUM_WORMS - 1);
+		    num_segs = hack_min(cnt, MAX_NUM_WORMS - 1);
 		    wormgone(mtmp);
 		} else num_segs = 0;
 
@@ -600,7 +600,7 @@ migrate_to_level(mtmp, tolev, xyloc, cc)
 	    register int cnt;
 	  /* **** NOTE: worm is truncated to # segs = max wormno size **** */
 	    cnt = count_wsegs(mtmp);
-	    num_segs = min(cnt, MAX_NUM_WORMS - 1);
+	    num_segs = hack_min(cnt, MAX_NUM_WORMS - 1);
 	    wormgone(mtmp);
 	}
 

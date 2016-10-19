@@ -658,8 +658,8 @@ wiz_show_seenv()
 	 * Each seenv description takes up 2 characters, so center
 	 * the seenv display around the hero.
 	 */
-	startx = max(1, u.ux-(COLNO/4));
-	stopx = min(startx+(COLNO/2), COLNO);
+	startx = hack_max(1, u.ux-(COLNO/4));
+	stopx = hack_min(startx+(COLNO/2), COLNO);
 	/* can't have a line exactly 80 chars long */
 	if (stopx - startx == COLNO/2) startx++;
 
@@ -2325,7 +2325,7 @@ register char *cmd;
 	    return;
 	} else if (do_rush) {
 	    if (firsttime) {
-		if (!multi) multi = max(COLNO,ROWNO);
+		if (!multi) multi = hack_max(COLNO,ROWNO);
 		u.last_str_turn = 0;
 	    }
 	    flags.mv = TRUE;

@@ -554,7 +554,7 @@ struct obj *list;	/* inventory or container contents */
 		amulets[i].typ = obj->otyp;
 	    } else amulets[i].count += obj->quan; /* always adds one */
 	} else if (obj->oclass == GEM_CLASS && obj->otyp < LUCKSTONE) {
-	    i = min(obj->otyp, LAST_GEM + 1) - FIRST_GEM;
+	    i = hack_min(obj->otyp, LAST_GEM + 1) - FIRST_GEM;
 	    if (!gems[i].count) {
 		gems[i].count = obj->quan;
 		gems[i].typ = obj->otyp;

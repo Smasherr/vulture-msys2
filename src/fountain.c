@@ -459,7 +459,7 @@ register struct obj *obj;
 			        for (otmp = invent; otmp && money > 0; otmp = otmp->nobj) if (otmp->oclass == COIN_CLASS) {
 				    int denomination = objects[otmp->otyp].oc_cost;
 				    long coin_loss = (money + denomination - 1) / denomination;
-                                    coin_loss = min(coin_loss, otmp->quan);
+                                    coin_loss = hack_min(coin_loss, otmp->quan);
 				    otmp->quan -= coin_loss;
 				    money -= coin_loss * denomination;				  
 				    if (!otmp->quan) delobj(otmp);

@@ -34,27 +34,27 @@ int x1,y1,x2,y2;
 int horiz;
 {
 	register int x,y,middle;
-#ifndef MAX
-#define MAX(a,b) (((a) > (b)) ? (a) : (b))
+#ifndef hack_MAX
+#define hack_MAX(a,b) (((a) > (b)) ? (a) : (b))
 #endif
-#ifndef MIN
-#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+#ifndef hack_MIN
+#define hack_MIN(a,b) (((a) < (b)) ? (a) : (b))
 #endif
 	if (horiz) {
 		middle = x1 + rn2(x2-x1+1);
-		for(x=MIN(x1,middle); x<=MAX(x1,middle); x++)
+		for(x=hack_MIN(x1,middle); x<=hack_MAX(x1,middle); x++)
 			corr(x, y1);
-		for(y=MIN(y1,y2); y<=MAX(y1,y2); y++)
+		for(y=hack_MIN(y1,y2); y<=hack_MAX(y1,y2); y++)
 			corr(middle,y);
-		for(x=MIN(middle,x2); x<=MAX(middle,x2); x++)
+		for(x=hack_MIN(middle,x2); x<=hack_MAX(middle,x2); x++)
 			corr(x, y2);
 	} else {
 		middle = y1 + rn2(y2-y1+1);
-		for(y=MIN(y1,middle); y<=MAX(y1,middle); y++)
+		for(y=hack_MIN(y1,middle); y<=hack_MAX(y1,middle); y++)
 			corr(x1, y);
-		for(x=MIN(x1,x2); x<=MAX(x1,x2); x++)
+		for(x=hack_MIN(x1,x2); x<=hack_MAX(x1,x2); x++)
 			corr(x, middle);
-		for(y=MIN(middle,y2); y<=MAX(middle,y2); y++)
+		for(y=hack_MIN(middle,y2); y<=hack_MAX(middle,y2); y++)
 			corr(x2,y);
 	}
 }

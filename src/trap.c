@@ -2461,11 +2461,11 @@ struct obj *box;	/* null for floor trap */
 	    }
 	    if (alt > num) num = alt;
 	    if (u.mhmax > mons[u.umonnum].mlevel)
-		u.mhmax -= rn2(min(u.mhmax,num + 1)), flags.botl = 1;
+		u.mhmax -= rn2(hack_min(u.mhmax,num + 1)), flags.botl = 1;
 	} else {
 	    num = d(2,4);
 	    if (u.uhpmax > u.ulevel)
-		u.uhpmax -= rn2(min(u.uhpmax,num + 1)), flags.botl = 1;
+		u.uhpmax -= rn2(hack_min(u.uhpmax,num + 1)), flags.botl = 1;
 	}
 	if (!num)
 	    You("are uninjured.");
