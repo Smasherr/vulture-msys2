@@ -38,9 +38,9 @@ GRAPHICAL = Y
 ifeq  "$(GRAPHICAL)" "Y"
 VULTURE = Y
 ifeq  "$(VULTURE)" "Y"
-DAX_ROOT = c:/x
+DAX_ROOT = c:/msys64/mingw64
 MINGW = $(DAX_ROOT)
-DAX = $(DAX_ROOT)/usr/i686-pc-mingw32
+DAX = $(DAX_ROOT)/x86_64-w64-mingw32
 SDLCFLAGS = -I$(DAX)/include -I$(MINGW)/include -I$(MINGW)/include/SDL -I$(DAX)/include/SDL
 SDLLIBS = -L$(DAX)/lib -L$(MINGW)/lib -lmingw32 -lSDLmain -lpng -lSDL_mixer -lSDL_ttf -lfreetype -lz -lbz2 -lsmpeg -lmodplug -lvorbis -lvorbisfile -lvorbis -logg -lSDL -ltheoradec -mwindows
 endif
@@ -578,7 +578,7 @@ ifeq  "$(VULTURE)" "Y"
 	$(subst /,\,copy $(JTP)/gamedata/movie/*.*     $(GAMEDIR)/movie)
 	$(subst /,\,copy $(JTP)/gamedata/music/*.*     $(GAMEDIR)/music)
 	$(subst /,\,copy $(JTP)/gamedata/fonts/*.*     $(GAMEDIR)/fonts)
-	$(subst /,\,copy $(DAX)/bin/SDL.dll $(GAMEDIR))
+	$(subst /,\,copy $(MINGW)/bin/SDL.dll $(GAMEDIR))
 endif
 
 #  copy $(NTSYS)/winnt.hlp    $(GAMEDIR)
